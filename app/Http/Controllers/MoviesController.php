@@ -8,10 +8,15 @@ use App\Http\Requests\MoviesPost;
 
 class MoviesController extends Controller
 {
-
-    public function index()
+    public function index(Request $request)
     {
+        $searchTerm = $request->input('title');
+        if($searchTerm) {
+            return Movie::search($searchTerm);
+        }
         return Movie::all();
+
+        // return Movie::where('title', 'like', '%'.$search.'%')->get();
     }
 
     public function create()
