@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
 
 class MoviesPost extends FormRequest
 {
@@ -21,12 +23,14 @@ class MoviesPost extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
         return [
-            'title' => 'required|unique:movies',
+            'title' => ['required',
+                Rule::unique('movies')->where('releaseDate', $request['releaseDate'])
+            ],
             'director' => 'required',
-            'duration' => 'required|integer|between:1,500',
+            'duration' => 'required|integer|gte:1|lte:500',
             'releaseDate' => 'required',
             'imageUrl' => 'url'
         ];
