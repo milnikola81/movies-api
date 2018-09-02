@@ -23,7 +23,5 @@ class Movie extends Model
             return $query->skip($skip);
         })
         ->get();
-
-
     }
 }
