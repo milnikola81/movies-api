@@ -10,9 +10,10 @@ class MoviesController extends Controller
 {
     public function index(Request $request)
     {
-        $searchTerm = $request->input('title');
-        $take = $request->input('take');
-        $skip = $request->input('skip');
+        $searchTerm = $request->input('title', '');
+        $take = $request->input('take', Movie::count());
+        $skip = $request->input('skip', 0);
+        // added default values
 
         return Movie::search($searchTerm, $take, $skip);
 

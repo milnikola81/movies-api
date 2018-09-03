@@ -16,7 +16,6 @@ class UsersController extends Controller
 
     public function store(UsersPostRequest $request)
     {
-        echo $request;
         return User::create([
             'name' => $request->name,
             'email' => $request->email,
