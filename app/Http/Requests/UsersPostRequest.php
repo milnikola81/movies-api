@@ -3,10 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
-class MoviesPost extends FormRequest
+class UsersPostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,16 +22,13 @@ class MoviesPost extends FormRequest
      *
      * @return array
      */
-    public function rules(Request $request)
+    public function rules()
     {
         return [
-            'title' => ['required',
-                Rule::unique('movies')->where('releaseDate', $request['releaseDate'])
-            ],
-            'director' => 'required',
-            'duration' => 'required|integer|gte:1|lte:500',
-            'releaseDate' => 'required',
-            'imageUrl' => 'url'
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            'confirmPassword' => 'required'
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Http\Requests\UsersPost;
+use App\Http\Requests\UsersPostRequest;
 
 class UsersController extends Controller
 {
@@ -14,10 +14,9 @@ class UsersController extends Controller
         return User::all();
     }
 
-    public function store(UsersPost $request)
+    public function store(UsersPostRequest $request)
     {
         echo $request;
-        // dd($request);
         return User::create([
             'name' => $request->name,
             'email' => $request->email,

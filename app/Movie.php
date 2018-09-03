@@ -12,7 +12,6 @@ class Movie extends Model
 
     public static function search($searchTerm, $take, $skip)
     {
-        // return Movie::where('title', 'like','%'.$searchTerm.'%')->get();
         return Movie::when($searchTerm, function ($query) use ($searchTerm) {
             return $query->where('title', 'like', '%'.$searchTerm.'%');
         })
@@ -23,5 +22,6 @@ class Movie extends Model
             return $query->skip($skip);
         })
         ->get();
+        // return Movie::where('title', 'like', '%' . $searchTerm .'%')->take($take)->skip($skip)->get();
     }
 }

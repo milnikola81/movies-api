@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Movie;
-use App\Http\Requests\MoviesPost;
+use App\Http\Requests\MoviesPostRequest;
 
 class MoviesController extends Controller
 {
@@ -23,14 +23,14 @@ class MoviesController extends Controller
         //
     }
 
-    public function store(MoviesPost $request)
+    public function store(MoviesPostRequest $request)
     {
         return Movie::create($request->all());
     }
 
     public function show($id)
     {
-        return Movie::find($id);
+        return Movie::findOrFail($id);
     }
 
     public function edit($id)
@@ -38,7 +38,7 @@ class MoviesController extends Controller
         //
     }
 
-    public function update(MoviesPost $request, $id)
+    public function update(MoviesPostRequest $request, $id)
     {
         $movie = Movie::findOrFail($id);
         $movie->update($request->all());
